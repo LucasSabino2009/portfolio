@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lucas Sabino | Portfólio</title>
+
+  <!-- Importando fontes do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cor-principal: #64ffda;
+      --cor-secundaria: #0b111e;
+      --cor-destaque: #112240;
+      --cor-texto: #ccd6f6;
+      --cor-cinza: #8892b0;
+      --cor-hover: #80cbc4;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Rajdhani', sans-serif; /* fonte padrão do corpo */
+    }
+
+    html, body {
+      overflow-x: hidden; /* Evita scroll horizontal */
+      min-height: 100vh;
+      background-color: var(--cor-secundaria);
+      color: var(--cor-texto);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, button {
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.05em;
+    }
+
+    .tela-inicial {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 34, 64, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .caixa-inicial {
+      background-color: #0a192f;
+      border: 2px solid var(--cor-principal);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      max-width: 300px;
+      box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+      animation: aparecer 0.6s ease;
+    }
+
+    .caixa-inicial img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 2px solid var(--cor-principal);
+    }
+
+    .caixa-inicial h1 {
+      font-size: 2rem;
+      color: var(--cor-principal);
+      margin-bottom: 1rem;
+    }
+
+    .caixa-inicial button {
+      padding: 10px 20px;
+      background-color: var(--cor-destaque);
+      color: var(--cor-principal);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .caixa-inicial button:hover {
+      background-color: var(--cor-hover);
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .tela-portfolio {
+      display: none;
+      flex-direction: column;
+      overflow-x: hidden; /* Evita scroll horizontal */
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      background-color: var(--cor-destaque);
+      border-bottom: 1px solid #1f2937;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: var(--cor-principal);
+      letter-spacing: 0.1em;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: var(--cor-cinza);
+      font-style: italic;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: var(--cor-principal);
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.05em;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--cor-hover);
+    }
+
+    main {
+      flex-grow: 1;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      color: var(--cor-principal);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--cor-principal);
+      padding-bottom: 0.3rem;
+      width: max-content;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: var(--cor-cinza);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.03em;
+      word-wrap: break-word;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill {
+      background: var(--cor-destaque);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 600;
+      color: var(--cor-principal);
+      box-shadow: 0 0 8px rgba(100, 255, 218, 0.2);
+      transition: transform 0.3s ease;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    .skill:hover {
+      transform: scale(1.1);
+    }
+
+    .projects-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--cor-destaque);
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(100, 255, 218, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+    }
+
+    .project-card h3 {
+      margin-bottom: 0.5rem;
+      color: var(--cor-principal);
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.05em;
+      font-size: 1.5rem;
+    }
+
+    .project-card p {
+      color: var(--cor-cinza);
+      font-size: 1rem;
+      word-wrap: break-word;
+    }
+
+    .voltar-btn {
+      margin: 1rem auto 2rem;
+      display: block;
+      padding: 10px 20px;
+      background-color: var(--cor-destaque);
+      color: var(--cor-principal);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.1em;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+      max-width: 300px;
+      width: 90%;
+      box-sizing: border-box;
+    }
+
+    .voltar-btn:hover {
+      background-color: var(--cor-hover);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #7a8699;
+      background-color: #020c1b;
+      border-top: 1px solid #1f2937;
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.03em;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background-color: #0a192f;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      color: var(--cor-texto);
+      text-align: center;
+      box-shadow: 0 0 20px rgba(100, 255, 218, 0.3);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.03em;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-content h3 {
+      color: var(--cor-principal);
+      margin-bottom: 1rem;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.05em;
+      font-size: 2rem;
+    }
+
+    .modal-content p {
+      color: var(--cor-cinza);
+      margin-bottom: 1rem;
+      word-wrap: break-word;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      display: block;
+      border: 2px solid var(--cor-principal);
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      background-color: var(--cor-destaque);
+      color: var(--cor-principal);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Bebas Neue', cursive;
+      letter-spacing: 0.05em;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background-color: var(--cor-hover);
+    }
+
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .voltar-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tela-inicial" id="telaInicial">
+    <div class="caixa-inicial">
+      <img src="IMG/Mídia.jfif" alt="Foto de Lucas Sabino" />
+      <h1>Lucas Sabino</h1>
+      <button onclick="iniciarPerfil()">Iniciar Perfil</button>
+    </div>
+  </div>
+
+  <div class="tela-portfolio" id="telaPortfolio">
+    <header>
+      <h1>Lucas Sabino</h1>
+      <p>Cursante de Técnico em Desenvolvimento de Sistemas</p>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="sobre">
+        <h2>Sobre Mim</h2>
+        <p>Meu nome é Lucas Sabino, tenho 15 anos e estudo na Escola Cedup Perfeito Manoel de Aguiar, no curso de Técnico em Desenvolvimento de Sistemas, e gosto de sempre aprender mais sobre tecnologia.</p>
+      </section>
+
+      <section id="habilidades">
+        <h2>Habilidades</h2>
+        <div class="skills-list">
+          <div class="skill">HTML5 (Aprendendo)</div>
+          <div class="skill">Portugol (Aprendendo)</div>
+          <div class="skill">SQL(Aprendendo)</div>
+        </div>
+      </section>
+
+      <section id="projetos">
+        <h2>Projetos</h2>
+        <div class="projects-list">
+          <div class="project-card" onclick="abrirModal(
+            'Drop Smart',
+            'Eu e meu grupo decidimos criar um aplicativo que conscientiza as pessoas a economizarem mais água por meio de mini games e atividades interativas dentro do App, e foi apresentado o prototipo em HTML do projeto na Feira de Ciências da minha escola e agora estamos desenvolvendo o aplicativo.',
+            'em_desenvolvimento.png'
+          )">
+            <h3>Drop Smart</h3>
+            <p>Aplicativo com minigames sobre economia de água.</p>
+          </div>
+
+          <div class="project-card" onclick="abrirModal(
+            'Hackathon',
+            'Durante o 3º Hackathon do CEDUP Perfeito Manoel de Aguiar, que teve como objetivo o desenvolvimento de soluções para problemas enfrentados pela cidade de Guaramirim, nossa equipe decidiu desenvolver um aplicativo com mini games e atividades interativas para conscientizar a população sobre a importância de economizar água.' ,
+            'Hackathon.png'
+          )">
+            <h3>Hackathon</h3>
+            <p>Projeto de solução para Guaramirim com app educativo.</p>
+          </div>
+
+          <div class="project-card" onclick="abrirModal(
+            'Evento da Vivo: Desafio dos Dados',
+            'Durante o Desafio dos Dados 2025, nossa equipe respondeu a uma série de questões em diferentes formatos, como múltipla escolha e dissertativas, ao longo de três etapas. O trabalho envolveu pesquisa, análise de materiais e troca de ideias, priorizando o raciocínio lógico e a colaboração em equipe.'
+          )">
+            <h3>Evento da Vivo: Desafio dos Dados</h3>
+            <p>Desafio de lógica, análise e trabalho em equipe.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato">
+        <h2>Contato</h2>
+        <p>📧 Email: sabinada13102009@email.com</p>
+      </section>
+    </main>
+
+    <button class="voltar-btn" onclick="voltarParaInicio()">Voltar para o Perfil</button>
+
+    <footer>
+      &copy; 2025 Lucas Sabino. Todos os direitos reservados.
+    </footer>
+  </div>
+
+  <!-- Modal de Projeto -->
+  <div class="modal" id="modalProjeto">
+    <div class="modal-content">
+      <h3 id="modalTitulo">Título do Projeto</h3>
+      <p id="modalDescricao">Descrição completa do projeto aqui.</p>
+      <img id="modalImagem" src="" alt="Imagem do Projeto" />
+      <button onclick="fecharModal()">Voltar</button>
+    </div>
+  </div>
+
+  <!-- Música -->
+  <audio id="musicaFundo" loop>
+    <source src="fundo.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const telaInicial = document.getElementById("telaInicial");
+    const telaPortfolio = document.getElementById("telaPortfolio");
+    const musica = document.getElementById("musicaFundo");
+
+    function iniciarPerfil() {
+      telaInicial.style.display = "none";
+      telaPortfolio.style.display = "flex";
+      musica.play();
+    }
+
+    function voltarParaInicio() {
+      telaPortfolio.style.display = "none";
+      telaInicial.style.display = "flex";
+      musica.pause();
+      musica.currentTime = 0;
+    }
+
+    function abrirModal(titulo, descricao, imagem) {
+      document.getElementById("modalTitulo").innerText = titulo;
+      document.getElementById("modalDescricao").innerText = descricao;
+      const img = document.getElementById("modalImagem");
+
+      if (imagem) {
+        img.src = imagem;
+        img.style.display = "block";
+      } else {
+        img.style.display = "none";
+      }
+
+      document.getElementById("modalProjeto").style.display = "flex";
+    }
+
+    function fecharModal() {
+      document.getElementById("modalProjeto").style.display = "none";
+    }
+  </script>
+</body>
+</html>
+
